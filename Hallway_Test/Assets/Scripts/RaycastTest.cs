@@ -23,6 +23,7 @@ public class RaycastTest : MonoBehaviour
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
                 Debug.Log(hit.collider.gameObject.tag);
+                Destroy(hit.collider.gameObject);
             }
         }
     }
