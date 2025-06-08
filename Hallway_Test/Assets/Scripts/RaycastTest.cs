@@ -5,7 +5,7 @@ public class RaycastTest : MonoBehaviour
 {
     Ray ray;
 
-    bool BallTaken = false;
+    bool KeyTaken = false;
 
     [SerializeField] GameObject lockedDoor;
     [SerializeField] GameObject Key;
@@ -22,20 +22,23 @@ public class RaycastTest : MonoBehaviour
         {
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                if (hit.collider.gameObject.tag == "Ball")
+                if (hit.collider.gameObject.tag == "Key")
                 {
                     hit.collider.gameObject.SetActive(false);
-                    BallTaken = true;
+                    KeyTaken = true;
                 }
                 
-                if (hit.collider.gameObject.tag == "LockedDoor")
+                if (hit.collider.gameObject.tag == "LockedDoor" && !KeyTaken)
                 {
+                    // Play Door Locked SFX 
+                    
                     Debug.Log("Door is Locked");
                 }
 
-                if (hit.collider.gameObject.tag == "LockedDoor" && BallTaken)
+                if (hit.collider.gameObject.tag == "LockedDoor" && KeyTaken)
                 {
                     Debug.Log("Door is Unlocked");
+                    // Play Door Unlocked SFX
                     lockedDoor.gameObject.SetActive(false);
                 }
                     // Get the name of the Game Object 

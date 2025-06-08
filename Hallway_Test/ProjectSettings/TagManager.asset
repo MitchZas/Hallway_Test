@@ -9,6 +9,8 @@ TagManager:
   - Ball
   - Rug
   - LockedDoor
+  - Window
+  - Key
   layers:
   - Default
   - TransparentFX
