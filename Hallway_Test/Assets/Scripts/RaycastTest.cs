@@ -10,6 +10,10 @@ public class RaycastTest : MonoBehaviour
     [SerializeField] GameObject lockedDoor;
     [SerializeField] GameObject Key;
 
+    [SerializeField] AudioSource lockedDoorSFX;
+    [SerializeField] AudioSource keyGrabSFX;
+    [SerializeField] AudioSource unlockedDoorSFX;
+
     void Update()
     {
         ray = new Ray(transform.position, transform.forward);
@@ -25,12 +29,14 @@ public class RaycastTest : MonoBehaviour
                 if (hit.collider.gameObject.tag == "Key")
                 {
                     hit.collider.gameObject.SetActive(false);
+                    keyGrabSFX.Play();  
+                    // Set Key Image on HUD to true 
                     KeyTaken = true;
                 }
                 
                 if (hit.collider.gameObject.tag == "LockedDoor" && !KeyTaken)
                 {
-                    // Play Door Locked SFX 
+                    lockedDoorSFX.Play();
                     
                     Debug.Log("Door is Locked");
                 }
@@ -38,8 +44,9 @@ public class RaycastTest : MonoBehaviour
                 if (hit.collider.gameObject.tag == "LockedDoor" && KeyTaken)
                 {
                     Debug.Log("Door is Unlocked");
-                    // Play Door Unlocked SFX
+                    unlockedDoorSFX.Play();
                     lockedDoor.gameObject.SetActive(false);
+                    // Set Key Image on HUD to false
                 }
                     // Get the name of the Game Object 
                     // Pop up UI with that Game Object Name with a prompt to pick up
