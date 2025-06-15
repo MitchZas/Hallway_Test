@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 public class RaycastTest : MonoBehaviour
 {
     Ray ray;
@@ -10,9 +11,13 @@ public class RaycastTest : MonoBehaviour
     [SerializeField] GameObject lockedDoor;
     [SerializeField] GameObject Key;
 
+    [SerializeField] Canvas keyImage;
+
     [SerializeField] AudioSource lockedDoorSFX;
     [SerializeField] AudioSource keyGrabSFX;
     [SerializeField] AudioSource unlockedDoorSFX;
+
+
 
     void Update()
     {
@@ -30,7 +35,7 @@ public class RaycastTest : MonoBehaviour
                 {
                     hit.collider.gameObject.SetActive(false);
                     keyGrabSFX.Play();  
-                    // Set Key Image on HUD to true 
+                    keyImage.gameObject.SetActive(true);
                     KeyTaken = true;
                 }
                 
@@ -46,7 +51,7 @@ public class RaycastTest : MonoBehaviour
                     Debug.Log("Door is Unlocked");
                     unlockedDoorSFX.Play();
                     lockedDoor.gameObject.SetActive(false);
-                    // Set Key Image on HUD to false
+                    keyImage.gameObject.SetActive(false);
                 }
                     // Get the name of the Game Object 
                     // Pop up UI with that Game Object Name with a prompt to pick up
